@@ -1,1 +1,11 @@
 php artisan make:model Comic - m
+php artisan make:controller tenController -r để tạo luôn khung crud
+php artisan make:controller admin/CategoryController --model=admin/Category --resource --requests (Tạo 1 crud nhưng là bản vip, gồm đủ crud và validate)
+
+
+tạo view: php artisan make:view tenFile
+
+
+api
+php artisan make:controller tenController -- api(tạo ra controller dùng để tạo api , không có hàm gọi giao diện )
+https://youtu.be/4cycwf9L64M?si=E1kg3R7DIKVghpRK 57p
