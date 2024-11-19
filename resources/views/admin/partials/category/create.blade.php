@@ -19,7 +19,9 @@
 
 
 
-    <button type="submit" class="btn btn-primary">Add Category</button>
+    <button type="submit" class="btn btn-primary">
+        <i class="fas fa-plus-circle"></i> Create
+    </button>
 </form>
 
     

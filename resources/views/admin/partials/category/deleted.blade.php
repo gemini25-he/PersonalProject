@@ -1,9 +1,9 @@
 @extends('admin.layouts.master')
 
 @section('content')
-@section('title', 'List Categorys')
+@section('title', 'List Deleted Categorys')
 
-<a class="btn btn-primary mb-4" href="{{ route('categorys.create') }}">Add new Category</a>
+
 <div class="card-body">
     <table class="table table-bordered" id="categoryTable" width="100%" cellspacing="0">
         <thead>
@@ -26,17 +26,14 @@
                             <span class="badge badge-danger">Inactive</span>
                         @endif
                     </td>
-                    <td>
-                        <a href="{{ route('categorys.edit', $category->id) }}" class="btn btn-link btn-sm ">
-                            <i class="fas fa-edit"></i> 
-                        </a>                                    
-                        <form action="{{ route('categorys.destroy', $category) }}" method="POST"
+                    <td>                                  
+                        <form action="{{ route('categorys.restore', $category) }}" method="POST"
                             style="display:inline;">
                             @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-link btn-sm text-danger"
-                                onclick="return confirm('Are you sure you want to delete this category?')">
-                                <i class="fas fa-trash-alt"></i>
+                            @method('PUT')
+                            <button type="submit" class="btn btn-link btn-sm text-info"
+                                onclick="return confirm('Are you sure you want to undo the deletion of this category?')">
+                                <i class="fas fa-undo"></i>
                             </button>
                         </form>
                     </td>
@@ -45,6 +42,9 @@
         </tbody>
     </table>
 </div>
+<a href="{{ route('categorys.index')}}" class="btn btn-primary">
+    <i class="fas fa-arrow-left"></i> Back
+</a>
 {{ $data->links() }}
 @if (session('toast_success'))
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">

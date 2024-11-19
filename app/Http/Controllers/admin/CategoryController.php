@@ -16,9 +16,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data = Category::latest('id')->paginate(5);
+        $data = Category::where('is_active', 1)->latest('id')->paginate(5);
 
-        return view('admin.partials.category.index',compact('data'));
+
+        return view('admin.partials.category.index', compact('data'));
     }
 
     /**
@@ -34,16 +35,10 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
-        DB::transaction(function () use ($request){
-            $dataCategory = [
-                "name" => $request->name,
-            ];
-
-           Category::query()->create($dataCategory);
-        });
-
-        return redirect()->route('categorys.index')->with('toast_success','Category added successfully');
+        $dataCategory =$request->validated();
+        Category::query()->create($dataCategory);
+        return redirect()->route('categorys.index')
+        ->with('toast_success', 'Category added successfully');
     }
 
     /**
@@ -59,7 +54,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.partials.category.edit', compact('category'));
     }
 
     /**
@@ -67,7 +62,11 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $data = $request->validated();
+        $category->update($data);
+        return back()
+            ->with('success', true)
+            ->with('msg', 'Category updated successfully!');
     }
 
     /**
@@ -75,6 +74,25 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        DB::transaction(function () use ($category) {
+            $category->update(['is_active' => 0]);
+        });
+        return redirect()->back()->with('toast_success', 'Category deleted successfully');
+    }
+
+    public function deleted()
+    {
+        $data = Category::where('is_active', 0)->latest('id')->paginate(5);
+
+
+        return view('admin.partials.category.deleted', compact('data'));
+    }
+
+    public function restore(Category $category)
+    {
+        $category->update(['is_active' => 1]);
+
+        return redirect()->back()
+            ->with('toast_success', 'Category restored successfully!');
     }
 }
