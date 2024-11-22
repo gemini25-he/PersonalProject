@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('content')
-
+@section('page','Trang Admin')
 @section('title','Dashboard')
     
 

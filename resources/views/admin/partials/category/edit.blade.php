@@ -2,14 +2,15 @@
 @extends('admin.layouts.master')
 
 @section('content')
-@section('title','Edit Category: '.$category->name)
+@section('title','Sửa danh mục: '.$category->name)
+@section('page','Sửa danh mục: '.$category->name)
     
 
 <form action="{{ route('categorys.update', $category->id) }}" method="POST">
     @csrf
 @method('PUT')
     <div class="form-group">
-        <label for="name">Category Name</label>
+        <label for="name">Tên danh mục</label>
         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $category->name }}" >
         
         @error('name')
@@ -20,11 +21,11 @@
 
 
     <button type="submit" class="btn btn-primary">
-        <i class="fas fa-check"></i> Save
+        <i class="fas fa-check"></i> Lưu
     </button>
 
     <a href="{{ route('categorys.index')}}" class="btn btn-primary">
-        <i class="fas fa-arrow-left"></i> Back
+        <i class="fas fa-arrow-left"></i> Trở lại
     </a>
     
 </form>

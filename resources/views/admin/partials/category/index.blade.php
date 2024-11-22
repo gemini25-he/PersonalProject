@@ -1,17 +1,18 @@
 @extends('admin.layouts.master')
 
 @section('content')
-@section('title', 'List Categorys')
+@section('title', 'Danh sách danh mục')
+@section('page', 'Quản lý danh mục')
 
-<a class="btn btn-primary mb-4" href="{{ route('categorys.create') }}">Add new Category</a>
+<a class="btn btn-primary mb-4" href="{{ route('categorys.create') }}">Thêm mới danh mục</a>
 <div class="card-body">
     <table class="table table-bordered" id="categoryTable" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th>ID.</th>
-                <th>Name</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th>Tên</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
@@ -35,7 +36,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-link btn-sm text-danger"
-                                onclick="return confirm('Are you sure you want to delete this category?')">
+                                onclick="return confirm('Bạn chắc chắn muốn xóa danh mục này chứ?')">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </form>
