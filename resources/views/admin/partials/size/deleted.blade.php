@@ -1,8 +1,8 @@
 @extends('admin.layouts.master')
 
 @section('content')
-@section('title', 'Danh sách màu đã xóa')
-@section('page', 'Danh sách màu đã xóa')
+@section('title', 'Danh sách size đã xóa')
+@section('page', 'Danh sách size đã xóa')
 
 
 <div class="card-body">
@@ -10,32 +10,30 @@
         <thead>
             <tr>
                 <th>ID.</th>
-                <th>Tên màu</th>
-                <th>Mã màu</th>
+                <th>Tên size</th>
                 <th>Trạng thái</th>
                 <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $color)
+            @foreach ($data as $size)
                 <tr>
-                    <td>{{ $color->id }}</td>
-                    <td>{{ $color->name }}</td>
-                    <td>{{ $color->hex_code }}</td>
+                    <td>{{ $size->id }}</td>
+                    <td>{{ $size->name }}</td>
                     <td>
-                        @if ($color->is_active == 1)
+                        @if ($size->is_active == 1)
                             <span class="badge badge-success">Active</span>
                         @else
                             <span class="badge badge-danger">Inactive</span>
                         @endif
                     </td>
                     <td>                                  
-                        <form action="{{ route('colors.restore', $color) }}" method="POST"
+                        <form action="{{ route('sizes.restore', $size) }}" method="POST"
                             style="display:inline;">
                             @csrf
                             @method('PUT')
                             <button type="submit" class="btn btn-link btn-sm text-info"
-                                onclick="return confirm('Are you sure you want to undo the deletion of this category?')">
+                                onclick="return confirm('Bạn muốn khôi phục size này chứ?')">
                                 <i class="fas fa-undo"></i>
                             </button>
                         </form>
@@ -45,7 +43,7 @@
         </tbody>
     </table>
 </div>
-<a href="{{ route('colors.index')}}" class="btn btn-primary">
+<a href="{{ route('sizes.index')}}" class="btn btn-primary">
     <i class="fas fa-arrow-left"></i> Back
 </a>
 {{ $data->links() }}

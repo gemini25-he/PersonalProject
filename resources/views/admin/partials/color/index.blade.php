@@ -40,7 +40,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-link btn-sm text-danger"
-                                onclick="return confirm('Are you sure you want to delete this category?')">
+                                onclick="return confirm('Bạn muốn xóa bỏ màu này chứ?')">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </form>

@@ -126,8 +126,8 @@
         <div id="collapseSizes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 {{-- <h6 class="collapse-header">Custom Components:</h6> --}}
-                <a class="collapse-item" href="">Sizes List</a>
-                <a class="collapse-item" href="">Deleted Sizes</a>
+                <a class="collapse-item" href="{{ route('sizes.index') }}">Sizes List</a>
+                <a class="collapse-item" href="{{ route('sizes.deleted') }}">Deleted Sizes</a>
             </div>
         </div>
     </li>

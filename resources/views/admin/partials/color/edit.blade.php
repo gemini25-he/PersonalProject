@@ -31,7 +31,7 @@
         <i class="fas fa-check"></i> Save
     </button>
 
-    <a href="{{ route('categorys.index')}}" class="btn btn-primary">
+    <a href="{{ route('colors.index')}}" class="btn btn-primary">
         <i class="fas fa-arrow-left"></i> Back
     </a>
     

@@ -2,16 +2,16 @@
 @extends('admin.layouts.master')
 
 @section('content')
-@section('title','Sửa màu: '.$color->name)
-@section('page','Sửa màu: '.$color->name)
+@section('title','Sửa size: '.$size->name)
+@section('page','Sửa size: '.$size->name)
     
 
-<form action="{{ route('colors.update', $color->id) }}" method="POST">
+<form action="{{ route('sizes.update', $size->id) }}" method="POST">
     @csrf
 @method('PUT')
     <div class="form-group">
-        <label for="name">Tên màu</label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $color->name }}" >
+        <label for="name">Tên size</label>
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $size->name }}" >
         
         @error('name')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -19,20 +19,20 @@
     </div>
 
     <div class="form-group">
-        <label for="hex_code">Mã màu</label>
-        <input type="text" class="form-control @error('hex_code') is-invalid @enderror" id="hex_code" name="hex_code" value="{{ $color->hex_code }}" >
+        <label for="description">Mô tả</label>
+        <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ $size->description }}" >
         
-        @error('hex_code')
+        @error('description')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
 
     <button type="submit" class="btn btn-primary">
-        <i class="fas fa-check"></i> Save
+        <i class="fas fa-check"></i> Lưu
     </button>
 
-    <a href="{{ route('categorys.index')}}" class="btn btn-primary">
-        <i class="fas fa-arrow-left"></i> Back
+    <a href="{{ route('sizes.index')}}" class="btn btn-primary">
+        <i class="fas fa-arrow-left"></i> Trở lại
     </a>
     
 </form>

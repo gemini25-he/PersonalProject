@@ -1,46 +1,45 @@
 @extends('admin.layouts.master')
 
 @section('content')
-@section('page', 'Quản lý màu')
+@section('page', 'Quản lý size')
     
 
-@section('title', 'Danh sách màu')
+@section('title', 'Danh sách size')
 
-<a class="btn btn-primary mb-4" href="{{ route('colors.create') }}">Thêm mới màu</a>
+<a class="btn btn-primary mb-4" href="{{ route('sizes.create') }}">Thêm mới size</a>
 <div class="card-body">
     <table class="table table-bordered" id="categoryTable" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th>ID.</th>
                 <th>Tên</th>
-                <th>Mã màu</th>
                 <th>Trạng thái</th>
                 <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $color)
+            @foreach ($data as $size)
                 <tr>
-                    <td>{{ $color->id }}</td>
-                    <td>{{ $color->name }}</td>
-                    <td>{{ $color->hex_code }}</td>
+                    <td>{{ $size->id }}</td>
+                    <td>{{ $size->name }}</td>
+                 
                     <td>
-                        @if ($color->is_active == 1)
+                        @if ($size->is_active == 1)
                             <span class="badge badge-success">Active</span>
                         @else
                             <span class="badge badge-danger">Inactive</span>
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('colors.edit', $color->id) }}" class="btn btn-link btn-sm ">
+                        <a href="{{ route('sizes.edit', $size->id) }}" class="btn btn-link btn-sm ">
                             <i class="fas fa-edit"></i> 
                         </a>                                    
-                        <form action="{{ route('colors.destroy', $color) }}" method="POST"
+                        <form action="{{ route('sizes.destroy', $size) }}" method="POST"
                             style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-link btn-sm text-danger"
-                                onclick="return confirm('Are you sure you want to delete this category?')">
+                                onclick="return confirm('Bạn muốn xóa bỏ size này chứ?')">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </form>

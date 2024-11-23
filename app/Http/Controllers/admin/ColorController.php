@@ -75,7 +75,7 @@ class ColorController extends Controller
     {
         $color->update(['is_active' => 0]);
 
-        return redirect()->back()->with('toast_success', 'Category deleted successfully');
+        return redirect()->back()->with('toast_success', 'Màu đã được xóa');
     }
 
     public function deleted()
@@ -91,6 +91,6 @@ class ColorController extends Controller
         $color->update(['is_active' => 1]);
 
         return redirect()->back()
-            ->with('toast_success', 'Color restored successfully!');
+            ->with('toast_success', 'Màu đã được khôi phục!');
     }
 }

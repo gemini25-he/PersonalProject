@@ -2,15 +2,15 @@
 @extends('admin.layouts.master')
 
 @section('content')
-@section('title','Thêm màu')
-@section('page','Thêm màu')
+@section('title','Thêm size')
+@section('page','Thêm size')
     
 
-<form action="{{ route('colors.store') }}" method="POST">
+<form action="{{ route('sizes.store') }}" method="POST">
     @csrf
 
     <div class="form-group">
-        <label for="name">Tên màu</label>
+        <label for="name">Tên size</label>
         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" >
         
         @error('name')
@@ -20,10 +20,10 @@
 
 
     <div class="form-group">
-        <label for="hex_code">Mã màu</label>
-        <input type="text" class="form-control @error('hex_code') is-invalid @enderror" id="hex_code" name="hex_code" value="{{ old('hex_code') }}" >
+        <label for="description">Mô tả</label>
+        <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description') }}" >
         
-        @error('hex_code')
+        @error('description')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>

@@ -14,7 +14,9 @@ class SizeController extends Controller
      */
     public function index()
     {
-        //
+        $data = Size::where('is_active', 1)->latest('id')->paginate(5);
+
+        return view('admin.partials.size.index', compact('data'));
     }
 
     /**
@@ -22,7 +24,7 @@ class SizeController extends Controller
      */
     public function create()
     {
-        //
+        return   view('admin.partials.size.create');
     }
 
     /**
@@ -30,7 +32,12 @@ class SizeController extends Controller
      */
     public function store(StoreSizeRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        Size::query()->create($data);
+
+        return redirect()->route('sizes.index')
+        ->with('toast_success', 'Thêm mới size thành công!');
     }
 
     /**
@@ -46,7 +53,7 @@ class SizeController extends Controller
      */
     public function edit(Size $size)
     {
-        //
+        return view('admin.partials.size.edit',compact('size'));
     }
 
     /**
@@ -54,7 +61,12 @@ class SizeController extends Controller
      */
     public function update(UpdateSizeRequest $request, Size $size)
     {
-        //
+        $data = $request->validated();
+
+        $size->update($data);
+        return back()
+        ->with('success', true)
+        ->with('msg', 'Cập nhật size thành công!');
     }
 
     /**
@@ -62,6 +74,24 @@ class SizeController extends Controller
      */
     public function destroy(Size $size)
     {
-        //
+        $size->update(['is_active'=> 0]);
+
+        return redirect()->back()->with('toast_success', 'Size đã được xóa');
+    }
+
+    public function deleted()
+    {
+        $data = Size::where('is_active', 0)->latest('id')->paginate(5);
+
+
+        return view('admin.partials.size.deleted', compact('data'));
+    }
+
+    public function restore(Size $size)
+    {
+        $size->update(['is_active' => 1]);
+
+        return redirect()->back()
+            ->with('toast_success', 'Size đã được khôi phục!');
     }
 }
