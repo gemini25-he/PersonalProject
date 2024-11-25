@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ColorController;
 use App\Http\Controllers\admin\SizeController;
@@ -24,3 +25,7 @@ Route::get('sizes/deleted', [SizeController::class, 'deleted'])->name('sizes.del
 Route::put('sizes/{size}/restore', [SizeController::class, 'restore'])->name('sizes.restore');
 Route::resource('sizes',SizeController::class);
 
+#route của brand
+Route::get('brands/deleted', [BrandController::class, 'deleted'])->name('brands.deleted');
+Route::put('brands/{brand}/restore', [BrandController::class, 'restore'])->name('brands.restore');
+Route::resource('brands',BrandController::class);
