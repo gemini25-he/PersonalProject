@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ColorController;
 use App\Http\Controllers\admin\SizeController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -29,3 +30,7 @@ Route::resource('sizes',SizeController::class);
 Route::get('brands/deleted', [BrandController::class, 'deleted'])->name('brands.deleted');
 Route::put('brands/{brand}/restore', [BrandController::class, 'restore'])->name('brands.restore');
 Route::resource('brands',BrandController::class);
+
+
+#route của product
+Route::resource('products', ProductController::class);

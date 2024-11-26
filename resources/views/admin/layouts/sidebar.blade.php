@@ -56,7 +56,7 @@
         <div id="collapsePro" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 {{-- <h6 class="collapse-header">Custom Components:</h6> --}}
-                <a class="collapse-item" href="">Products List</a>
+                <a class="collapse-item" href="{{ route('products.index') }}">Products List</a>
                 <a class="collapse-item" href="">Deleted Products</a>
             </div>
         </div>
