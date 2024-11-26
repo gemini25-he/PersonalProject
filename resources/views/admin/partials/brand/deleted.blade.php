@@ -1,8 +1,8 @@
 @extends('admin.layouts.master')
 
 @section('content')
-@section('title', 'Danh sách màu đã xóa')
-@section('page', 'Danh sách màu đã xóa')
+@section('title', 'Danh sách brand đã xóa')
+@section('page', 'Danh sách brand đã xóa')
 
 
 <div class="card-body">
@@ -10,32 +10,30 @@
         <thead>
             <tr>
                 <th>ID.</th>
-                <th>Tên màu</th>
-                <th>Mã màu</th>
+                <th>Tên brand</th>
                 <th>Trạng thái</th>
                 <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $color)
+            @foreach ($data as $brand)
                 <tr>
-                    <td>{{ $color->id }}</td>
-                    <td>{{ $color->name }}</td>
-                    <td>{{ $color->hex_code }}</td>
+                    <td>{{ $brand->id }}</td>
+                    <td>{{ $brand->name }}</td>
                     <td>
-                        @if ($color->is_active == 1)
+                        @if ($brand->is_active == 1)
                             <span class="badge badge-success">Active</span>
                         @else
                             <span class="badge badge-danger">Inactive</span>
                         @endif
                     </td>
                     <td>                                  
-                        <form action="{{ route('colors.restore', $color) }}" method="POST"
+                        <form action="{{ route('brands.restore', $brand) }}" method="POST"
                             style="display:inline;">
                             @csrf
                             @method('PUT')
                             <button type="submit" class="btn btn-link btn-sm text-info"
-                                onclick="return confirm('Are you sure you want to undo the deletion of this category?')">
+                                onclick="return confirm('Bạn muốn khôi phục thương hiệu này chứ?')">
                                 <i class="fas fa-undo"></i>
                             </button>
                         </form>
@@ -45,8 +43,8 @@
         </tbody>
     </table>
 </div>
-<a href="{{ route('colors.index')}}" class="btn btn-primary">
-    <i class="fas fa-arrow-left"></i> Back
+<a href="{{ route('brands.index')}}" class="btn btn-primary">
+    <i class="fas fa-arrow-left"></i> Trở lại
 </a>
 {{ $data->links() }}
 @if (session('toast_success'))

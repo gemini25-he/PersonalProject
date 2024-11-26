@@ -2,16 +2,16 @@
 @extends('admin.layouts.master')
 
 @section('content')
-@section('title','Sửa màu: '.$color->name)
-@section('page','Sửa màu: '.$color->name)
+@section('title','Sửa brand: '.$brand->name)
+@section('page','Sửa brand: '.$brand->name)
     
 
-<form action="{{ route('colors.update', $color->id) }}" method="POST">
+<form action="{{ route('brands.update', $brand->id) }}" method="POST">
     @csrf
 @method('PUT')
     <div class="form-group">
-        <label for="name">Tên màu</label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $color->name }}" >
+        <label for="name">Tên brand</label>
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $brand->name }}" >
         
         @error('name')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -19,19 +19,37 @@
     </div>
 
     <div class="form-group">
-        <label for="hex_code">Mã màu</label>
-        <input type="text" class="form-control @error('hex_code') is-invalid @enderror" id="hex_code" name="hex_code" value="{{ $color->hex_code }}" >
+        <label for="description">Mô tả</label>
+        <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ $brand->description }}" >
         
-        @error('hex_code')
+        @error('description')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
+    </div>
+
+    <div class="form-group">
+        <label for="logo">Logo thương hiệu</label>
+        <input type="file" class="form-control @error('logo') is-invalid @enderror" id="logo" name="logo">
+        
+        @error('logo')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="form-group">
+        <label>Logo hiện tại:</label><br>
+        @if ($brand->logo)
+            <img src="{{ asset('storage/' . $brand->logo) }}" alt="Current Logo" width="100">
+        @else
+            <p>Chưa có logo</p>
+        @endif
     </div>
 
     <button type="submit" class="btn btn-primary">
         <i class="fas fa-check"></i> Save
     </button>
 
-    <a href="{{ route('colors.index')}}" class="btn btn-primary">
+    <a href="{{ route('brands.index')}}" class="btn btn-primary">
         <i class="fas fa-arrow-left"></i> Back
     </a>
     

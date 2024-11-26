@@ -33,6 +33,7 @@
                     <td>
                         @if ($brand->logo)
                         <img src="{{ asset('storage/' . $brand->logo) }}" alt="{{ $brand->name }} logo" width="100">
+                        
                         @else
                             <span class="text-danger">Chưa cập nhật ảnh</span>
                         @endif
