@@ -9,3 +9,50 @@ tạo view: php artisan make:view tenFile
 api
 php artisan make:controller tenController -- api(tạo ra controller dùng để tạo api , không có hàm gọi giao diện )
 https://youtu.be/4cycwf9L64M?si=E1kg3R7DIKVghpRK 57p
+
+resources/
+│
+└───views/
+    ├───layouts/
+    │   ├───app.blade.php         # Layout chính cho ứng dụng người dùng
+    │   ├───header.blade.php      # Header của trang (bao gồm logo, menu, etc)
+    │   ├───footer.blade.php      # Footer của trang
+    │   └───navbar.blade.php      # Thanh điều hướng (menu trên cùng)
+    │
+    ├───partials/
+    │   ├───cart.blade.php        # Giỏ hàng (hiển thị giỏ hàng người dùng)
+    │   ├───search.blade.php      # Form tìm kiếm sản phẩm
+    │   ├───product-list.blade.php # Danh sách sản phẩm (hiển thị sản phẩm trong cửa hàng)
+    │   └───modal.blade.php       # Modal cho các chức năng (thêm giỏ hàng, login, etc)
+    │
+    ├───home/
+    │   ├───index.blade.php       # Trang chủ (hiển thị các sản phẩm nổi bật, khuyến mãi)
+    │   └───about.blade.php       # Trang giới thiệu về cửa hàng
+    │
+    ├───product/
+    │   ├───index.blade.php       # Trang danh sách sản phẩm
+    │   ├───show.blade.php        # Trang chi tiết sản phẩm
+    │   └───category.blade.php    # Trang sản phẩm theo danh mục
+    │
+    ├───cart/
+    │   ├───index.blade.php       # Giỏ hàng của người dùng
+    │   └───checkout.blade.php    # Thanh toán giỏ hàng
+    │
+    ├───auth/
+    │   ├───login.blade.php       # Trang đăng nhập
+    │   ├───register.blade.php    # Trang đăng ký
+    │   ├───password-reset.blade.php # Trang đặt lại mật khẩu
+    │   └───verify.blade.php      # Trang xác thực email (nếu có)
+    │
+    ├───order/
+    │   ├───index.blade.php       # Trang lịch sử đơn hàng
+    │   ├───show.blade.php        # Trang chi tiết đơn hàng
+    │   └───track.blade.php       # Trang theo dõi đơn hàng
+    │
+    ├───user/
+    │   ├───profile.blade.php     # Trang thông tin cá nhân
+    │   └───settings.blade.php    # Trang cài đặt người dùng
+    │
+    └───error/
+        ├───404.blade.php         # Trang lỗi 404 (Không tìm thấy trang)
+        └───500.blade.php         # Trang lỗi 500 (Lỗi máy chủ)

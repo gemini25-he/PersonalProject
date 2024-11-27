@@ -34,3 +34,10 @@ Route::resource('brands',BrandController::class);
 
 #route của product
 Route::resource('products', ProductController::class);
+
+
+
+// khai báo route cho user
+Route::get('client', function () {
+    return view('client.home.index');
+});
