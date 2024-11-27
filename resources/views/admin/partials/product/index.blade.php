@@ -7,14 +7,14 @@
 
 <a class="btn btn-primary mb-4" href="{{ route('products.create') }}">Thêm mới sản phẩm</a>
 <div class="card-body">
-    <table class="table table-bordered" id="productTable" width="100%" cellspacing="0">
+    <table class="table">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Tên sản phẩm</th>
                 <th>Giá</th>
                 <th>Trạng thái</th>
-                <th>Ảnh sản phẩm</th>
+                <th>Hình ảnh</th>
                 <th>Hành động</th>
             </tr>
         </thead>
@@ -23,44 +23,40 @@
                 <tr>
                     <td>{{ $product->id }}</td>
                     <td>{{ $product->name }}</td>
-                    <td>{{ number_format($product->price, 0, ',', '.') }} VNĐ</td>
+                    <td>{{ number_format($product->price, 0, ',', '.') }} VND</td>
+                    <td>{{ $product->status == 1 ? 'Hoạt động' : 'Ngừng hoạt động' }}</td>
                     <td>
-                        @if ($product->status == 1)
-                            <span class="badge badge-success">Còn hàng</span>
+                        @if ($product->image)
+                            <img src="{{ asset('storage/' . $product->image) }}" alt="Image" width="100">
                         @else
-                            <span class="badge badge-danger">Hết hàng</span>
+                            <span>Không có hình ảnh</span>
                         @endif
                     </td>
+
                     <td>
-                        @if ($product->images->isNotEmpty())
-                            <img src="{{ asset('storage/' . $product->images->first()->image_path) }}" alt="{{ $product->name }}" class="img-thumbnail" style="width: 100px;">
-                        @else
-                            <span>Chưa có ảnh</span>
-                        @endif
-                    </td>
-                    <td>
-                        <a href="{{ route('products.show', $product->id) }}" class="btn btn-link btn-sm">
-                            <i class="fas fa-eye"></i> Xem chi tiết
-                        </a>
-                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-link btn-sm">
-                            <i class="fas fa-edit"></i> Sửa
-                        </a>
-                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('products.show', $product) }}" class="btn btn-link btn-sm"> <i
+                                class="fas fa-eye"></i></a>
+                        <a href="{{ route('products.edit', $product) }}" class="btn btn-link btn-sm"> <i
+                                class="fas fa-edit"></i> </a>
+                        <form action="{{ route('products.destroy', $product) }}" method="POST"
+                            style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-link btn-sm text-danger"
-                                onclick="return confirm('Bạn muốn xóa bỏ sản phẩm này chứ?')">
-                                <i class="fas fa-trash-alt"></i> Xóa
-                            </button>
+                            <button type="submit" class="btn btn-link btn-sm text-danger"> <i
+                                    class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    <!-- Hiển thị phân trang -->
+    {{ $products->links() }}
+
 </div>
 
-{{ $products->links() }}
+
 
 @if (session('toast_success'))
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">

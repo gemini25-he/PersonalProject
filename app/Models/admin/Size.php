@@ -13,4 +13,9 @@ class Size extends Model
         'is_active',
         'description'
     ];
+
+    public function variants()
+    {
+        return $this->hasMany(ProductVariant::class);
+    }
 }

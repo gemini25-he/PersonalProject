@@ -10,7 +10,8 @@
     <!-- Tên Sản Phẩm -->
     <div class="form-group">
         <label for="name">Tên sản phẩm</label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+            value="{{ old('name') }}" required>
         @error('name')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
@@ -19,7 +20,8 @@
     <!-- Mô Tả -->
     <div class="form-group">
         <label for="description">Mô tả sản phẩm</label>
-        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="4" required>{{ old('description') }}</textarea>
+        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
+            rows="4" required>{{ old('description') }}</textarea>
         @error('description')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
@@ -28,7 +30,8 @@
     <!-- Giá -->
     <div class="form-group">
         <label for="price">Giá sản phẩm</label>
-        <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}" required>
+        <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price"
+            value="{{ old('price') }}" required>
         @error('price')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
@@ -39,7 +42,8 @@
         <label for="brand_id">Thương hiệu</label>
         <select class="form-control @error('brand_id') is-invalid @enderror" id="brand_id" name="brand_id" required>
             @foreach ($brands as $brand)
-                <option value="{{ $brand->id }}" {{ old('brand_id') == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
+                <option value="{{ $brand->id }}" {{ old('brand_id') == $brand->id ? 'selected' : '' }}>
+                    {{ $brand->name }}</option>
             @endforeach
         </select>
         @error('brand_id')
@@ -50,9 +54,11 @@
     <!-- Danh Mục -->
     <div class="form-group">
         <label for="category_id">Danh mục</label>
-        <select class="form-control @error('category_id') is-invalid @enderror" id="category_id" name="category_id" required>
+        <select class="form-control @error('category_id') is-invalid @enderror" id="category_id" name="category_id"
+            required>
             @foreach ($categories as $category)
-                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}</option>
             @endforeach
         </select>
         @error('category_id')
@@ -63,7 +69,8 @@
     <!-- Ảnh Sản Phẩm -->
     <div class="form-group">
         <label for="image">Ảnh sản phẩm</label>
-        <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*" required>
+        <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image"
+            accept="image/*" required>
         @error('image')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
@@ -79,35 +86,37 @@
                 <div class="d-flex flex-wrap gap-3">
                     <div class="form-group flex-fill">
                         <label for="size_id">Kích cỡ</label>
-                        <select class="form-control" name="variants[][size_id]" required>
-                            <option value="1">Size M</option>
-                            <option value="2">Size L</option>
-                            <option value="3">Size XL</option>
+                        <select class="form-control" name="variants[0][size_id]">
+                            
+                            @foreach ($sizes as $size)
+                                <option value="{{ $size->id }}">{{ $size->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group flex-fill">
                         <label for="color_id">Màu sắc</label>
-                        <select class="form-control" name="variants[][color_id]" required>
-                            <option value="1">Đỏ</option>
-                            <option value="2">Xanh</option>
-                            <option value="3">Đen</option>
+                        <select class="form-control" name="variants[0][color_id]">
+                        
+                            @foreach ($colors as $color)
+                                <option value="{{ $color->id }}">{{ $color->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group flex-fill">
                         <label for="sku">Mã sản phẩm (SKU)</label>
-                        <input type="text" class="form-control" name="variants[][sku]" required>
+                        <input type="text" class="form-control" name="variants[0][sku]">
                     </div>
                     <div class="form-group flex-fill">
                         <label for="variant_price">Giá biến thể</label>
-                        <input type="number" class="form-control" name="variants[][price]" required>
+                        <input type="number" class="form-control" name="variants[0][price]">
                     </div>
                     <div class="form-group flex-fill">
                         <label for="quantity">Số lượng</label>
-                        <input type="number" class="form-control" name="variants[][quantity]" required>
+                        <input type="number" class="form-control" name="variants[0][quantity]">
                     </div>
                     <div class="form-group flex-fill">
                         <label for="is_featured">Nổi bật</label>
-                        <input type="checkbox" name="variants[][is_featured]">
+                        <input type="checkbox" name="variants[0][is_featured]">
                     </div>
                 </div>
                 <button type="button" class="btn btn-danger remove-variant">Xóa Biến Thể</button>
@@ -124,56 +133,60 @@
 </form>
 
 <script>
-    // Xử lý thêm biến thể mới
-    document.getElementById('add-variant').addEventListener('click', function() {
-        const variantHtml = `
-            <div class="variant-group p-3 m-2 border rounded mb-4">
-                <div class="d-flex flex-wrap gap-3">
-                    <div class="form-group flex-fill">
-                        <label for="size_id">Kích cỡ</label>
-                        <select class="form-control" name="variants[][size_id]" required>
-                            <option value="1">Size M</option>
-                            <option value="2">Size L</option>
-                            <option value="3">Size XL</option>
-                        </select>
-                    </div>
-                    <div class="form-group flex-fill">
-                        <label for="color_id">Màu sắc</label>
-                        <select class="form-control" name="variants[][color_id]" required>
-                            <option value="1">Đỏ</option>
-                            <option value="2">Xanh</option>
-                            <option value="3">Đen</option>
-                        </select>
-                    </div>
-                    <div class="form-group flex-fill">
-                        <label for="sku">Mã sản phẩm (SKU)</label>
-                        <input type="text" class="form-control" name="variants[][sku]" required>
-                    </div>
-                    <div class="form-group flex-fill">
-                        <label for="variant_price">Giá biến thể</label>
-                        <input type="number" class="form-control" name="variants[][price]" required>
-                    </div>
-                    <div class="form-group flex-fill">
-                        <label for="quantity">Số lượng</label>
-                        <input type="number" class="form-control" name="variants[][quantity]" required>
-                    </div>
-                    <div class="form-group flex-fill">
-                        <label for="is_featured">Nổi bật</label>
-                        <input type="checkbox" name="variants[][is_featured]">
-                    </div>
+   document.getElementById('add-variant').addEventListener('click', function() {
+    // Lấy số lượng biến thể hiện tại để gán chỉ mục mới
+    const variantsCount = document.querySelectorAll('.variant-group').length;
+    
+    const variantHtml = `
+        <div class="variant-group p-3 m-2 border rounded mb-4">
+            <div class="d-flex flex-wrap gap-3">
+                <div class="form-group flex-fill">
+                    <label for="size_id">Kích cỡ</label>
+                    <select class="form-control" name="variants[${variantsCount}][size_id]">
+                        @foreach ($sizes as $size)
+                            <option value="{{ $size->id }}">{{ $size->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
-                <button type="button" class="btn btn-danger remove-variant">Xóa Biến Thể</button>
+                <div class="form-group flex-fill">
+                    <label for="color_id">Màu sắc</label>
+                    <select class="form-control" name="variants[${variantsCount}][color_id]">
+                        @foreach ($colors as $color)
+                            <option value="{{ $color->id }}">{{ $color->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group flex-fill">
+                    <label for="sku">Mã sản phẩm (SKU)</label>
+                    <input type="text" class="form-control" name="variants[${variantsCount}][sku]" >
+                </div>
+                <div class="form-group flex-fill">
+                    <label for="variant_price">Giá biến thể</label>
+                    <input type="number" class="form-control" name="variants[${variantsCount}][price]" >
+                </div>
+                <div class="form-group flex-fill">
+                    <label for="quantity">Số lượng</label>
+                    <input type="number" class="form-control" name="variants[${variantsCount}][quantity]" required>
+                </div>
+                <div class="form-group flex-fill">
+                    <label for="is_featured">Nổi bật</label>
+                    <input type="checkbox" name="variants[${variantsCount}][is_featured]">
+                </div>
             </div>
-        `;
-        document.getElementById('variant-container').insertAdjacentHTML('beforeend', variantHtml);
+            <button type="button" class="btn btn-danger remove-variant">Xóa Biến Thể</button>
+        </div>
+    `;
+    
+    document.getElementById('variant-container').insertAdjacentHTML('beforeend', variantHtml);
 
-        // Xử lý xóa biến thể
-        document.querySelectorAll('.remove-variant').forEach(function(button) {
-            button.addEventListener('click', function() {
-                button.closest('.variant-group').remove();
-            });
+    // Xử lý xóa biến thể
+    document.querySelectorAll('.remove-variant').forEach(function(button) {
+        button.addEventListener('click', function() {
+            button.closest('.variant-group').remove();
         });
     });
+});
+
 </script>
 
 @endsection

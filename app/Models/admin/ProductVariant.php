@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProductVariant extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'product_id',
         'size_id',
@@ -15,22 +16,21 @@ class ProductVariant extends Model
         'sku',
         'price',
         'quantity',
-        'is_featured',
+        'status',
     ];
 
-    // Mối quan hệ với sản phẩm
     public function product()
     {
         return $this->belongsTo(Product::class);
     }
 
-    // Mối quan hệ với bảng size
+    // Quan hệ với Size
     public function size()
     {
         return $this->belongsTo(Size::class);
     }
 
-    // Mối quan hệ với bảng color
+    // Quan hệ với Color
     public function color()
     {
         return $this->belongsTo(Color::class);
